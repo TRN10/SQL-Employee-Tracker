@@ -25,3 +25,4 @@ VALUES  ("Argus", "Filch", 1, NULL),
         ("Pomona", "Sprout", 5, NULL),
         ("Sybil", "Trelawney", 6, NULL),
         ("Albus", "Dumbledore", 7, NULL);
+
