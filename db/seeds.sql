@@ -17,7 +17,7 @@ VALUES  ("Potions Teacher", 150000, 1),
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES  ("Argus", "Filch", 1, NULL),
-        ("Filius", "Flitwick", 2, NULL),
+        ("Filius", "Flitwick", 2, 1),
         ("Gilderoy", "Lockhart", 3, NULL),
         ("Poppy", "Pomfrey", 3, NULL),
         ("Quirinus", "Quirrell", 4, NULL),

@@ -2,7 +2,11 @@
 const mysql = require('mysql2');
 const consoleTable = require('console.table');
 const inquirer = require('inquirer');
-const { monitorEventLoopDelay } = require('perf_hooks');
+// const viewDepartment = require('./helpers/utils.js');
+// const viewRoles = require('./helpers/utils.js');
+// const viewEmployees = require('./helpers/utils.js');
+// const initialPrompt = require('./helpers/utils.js');
+const { viewDepartment(), viewRoles(), viewEmployees(), initialPrompt() } = require('./helpers/utils.js');
 
 // create connection to database
 const db = mysql.createConnection(
@@ -21,7 +25,7 @@ const initialOptions = [
         type: 'list',
         name: 'options',
         message: 'What would you like to do?',
-        choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role'],
+        choices: ['View all departments', 'View all roles', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role', 'Exit'],
     }
 ];
 
@@ -74,30 +78,16 @@ const addEmployee = [
     },
 ];
 
+// function to initialise app
 function init() {
+
     initialPrompt();
-    addNewDepartment();
 
 }
 
-function initialPrompt() {
-    inquirer.prompt(initialOptions).then((initialResponses) => {
-        console.log(initialResponses);
 
 
-
-    })
-};
-
-
-
+// call function to initialise app
 init();
 
 module.exports = db;
-
-function addNewDepartment() {
-    inquirer.prompt(addDepartment).then((addDepartmentResponse) => {
-        const sql = `INSERT INTO department(name)
-        VALUES(${addDepartmentResponse})`;
-    });
-}
