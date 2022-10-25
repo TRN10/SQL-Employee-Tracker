@@ -110,11 +110,26 @@ function addNewDepartment() {
     });
 }
 
+function addNewRole() {
+    inquirer.prompt(addRole).then((addRoleResponse) => {
+        const sql = `INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)`;
+        const params = [addRoleResponse.roleName, addRoleResponse.salary, addRoleResponse.roleDepartment];
+        db.query(sql, params, (err, result) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            console.table(result);
+            initialPrompt();
+        })
+    });
+}
+
 function addNewEmployee() {
     inquirer.prompt(addEmployee).then((addEmployeeResponse) => {
-        const sql = `INSERT INTO employee(first_name, last_name) VALUES (?, ?)`;
+        const sql = `INSERT INTO employee (first_name, last_name) VALUES (?, ?)`;
         const params = [addEmployeeResponse.firstName, addEmployeeResponse.lastName];
-        db.query(sql, addEmployeeResponse, (err, result) => {
+        db.query(sql, params, (err, result) => {
             if (err) {
                 console.error(err);
                 return;
