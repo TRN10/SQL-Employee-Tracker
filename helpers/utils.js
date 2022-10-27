@@ -31,9 +31,10 @@ const addRole = [
         message: 'What is the salary for the role?',
     },
     {
-        type: 'input',
+        type: 'list',
         name: 'roleDepartment',
         message: 'What department is the role within?',
+        choices: ["a", "b", "c"]
     },
 ];
 
@@ -60,7 +61,7 @@ const addEmployee = [
     },
 ];
 
-// utility functions to interact with sql
+// utility functions to interact with db
 function viewDepartment() {
     db.query('SELECT * FROM department', function (err, results) {
         if (err) {
@@ -120,10 +121,32 @@ function addNewRole() {
                 return;
             }
             console.table(result);
-            initialPrompt();
+
         })
     });
+
+    // need to query db or some array of department choicews 
+
+
+    // db.query('SELECT * FROM department', function (err, results) {
+    //     if (err) {
+    //         console.error(err);
+    //         throw err
+
+    //     }
+    //     deptChoices = results.map(({id, name})) => {
+    //         return ({
+    //             name: department.name,
+    //             value: department.id
+    //         })
+
+
+    //     })
+
+
+
 }
+
 
 function addNewEmployee() {
     inquirer.prompt(addEmployee).then((addEmployeeResponse) => {
@@ -140,6 +163,7 @@ function addNewEmployee() {
     });
 }
 
+// function to initiate inquirer prompts 
 function initialPrompt() {
     inquirer.prompt(initialOptions).then((initialResponses) => {
         console.log(initialResponses);
@@ -160,10 +184,14 @@ function initialPrompt() {
         } else if (options === 'Update an employee role') {
             updateRole();
         } else {
-            return;
+            quit();
         }
 
     })
 };
 
+function quit() {
+    console.log("Goodbye")
+    process.exit()
+}
 module.exports = { initialPrompt }
